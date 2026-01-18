@@ -35,8 +35,8 @@ Steps:
 2. Set DB credentials (recommended):
    create `src/main/resources/application.properties`
 
-db.url=
-db.user=
+db.url=  
+db.user=  
 db.password=
 
 
