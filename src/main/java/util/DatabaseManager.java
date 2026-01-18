@@ -8,8 +8,3 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class DatabaseManager {
-
-    private final String url;
-    private final String user;
-    private final String password;
-

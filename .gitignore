@@ -41,3 +41,16 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+out/
+
+# Secrets / local configs
+src/main/resources/application.properties
+.env
