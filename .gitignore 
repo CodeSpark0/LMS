@@ -1,0 +1,20 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Build outputs
+build/
+target/
+.gradle/
+
+# OS / logs
+.DS_Store
+*.log
+
+# Secrets / config
+application.properties
+**/application.properties
+.env

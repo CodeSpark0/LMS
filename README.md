@@ -37,7 +37,7 @@ Steps:
 
 db.url=  
 db.user=  
-db.password=
+db.password=      
 
 
 3. Run the `Main` class  
