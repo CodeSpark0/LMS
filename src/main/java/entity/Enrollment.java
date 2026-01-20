@@ -8,6 +8,14 @@ public class Enrollment {
     private Course course;
     private LocalDateTime enrolledAt;
 
+    public  Enrollment (Long id, User user, Course course,LocalDateTime enrolledAt) {
+
+
+
+    }
+
+
+
     public Long getId(){return id;}
     public User getUser(){return user;}
     public Course getCourse(){return course;}
