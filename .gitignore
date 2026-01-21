@@ -54,3 +54,4 @@ out/
 # Secrets / local configs
 src/main/resources/application.properties
 .env
+

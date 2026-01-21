@@ -1,10 +1,7 @@
 package entity;
 
-import java.io.Serializable;
+public class Course {
 
-public class Course implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String title;
