@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public final class DatabaseManager {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String URL = "jdbc:postgresql://localhost:5432/lms";
     private static final String USER = "postgres";
     private static final String PASSWORD = "mazhitov007";
 

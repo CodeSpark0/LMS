@@ -6,6 +6,9 @@ public class Grade {
     private Long courseId;
     private int percentage;
 
+    public Grade() {
+    }
+
     public Grade(Long studentId, Long courseId, int percentage) {
         this.studentId = studentId;
         this.courseId = courseId;
@@ -30,7 +33,7 @@ public class Grade {
 
     public void setPercentage(int percentage) {
         if (percentage < 0 || percentage > 100) {
-            throw new IllegalArgumentException("0 and 100");
+            throw new IllegalArgumentException("percentage must be between 0 and 100");
         }
         this.percentage = percentage;
     }

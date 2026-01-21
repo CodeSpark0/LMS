@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class RoleManager {
     private static final Map<Role, Set<String>> rolePermissions = Map.of(
-            Role.ADMIN, Set.of("ADD_GRADE", "VIEW_GRADES", "EDIT_GRADES", "DELETE_GRADES"),
+            Role.TEACHER, Set.of("ADD_GRADE", "VIEW_GRADES", "EDIT_GRADES", "DELETE_GRADES"),
             Role.STUDENT, Set.of("VIEW_GRADES")
     );
 

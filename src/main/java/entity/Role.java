@@ -1,5 +1,6 @@
 package entity;
 
 public enum Role {
-    ADMIN, STUDENT
+    STUDENT,
+    TEACHER
 }
