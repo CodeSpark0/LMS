@@ -13,7 +13,7 @@ public class AuthService {
     public Optional<AuthResult> login(String email, String password) {
 
         String userSql = """
-            SELECT id, password
+            SELECT id, password_hash
             FROM users
             WHERE email = ?
         """;
@@ -32,9 +32,8 @@ public class AuthService {
             }
 
             Long userId = rs.getLong("id");
-            String storedPassword = rs.getString("password");
+            String storedPassword = rs.getString("password_hash");
 
-            // Plain-text comparison (INSECURE, but explicit)
             if (!storedPassword.equals(password)) {
                 return Optional.empty();
             }
