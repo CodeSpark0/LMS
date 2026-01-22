@@ -55,5 +55,16 @@ public class CourseService {
         }
     }
 
+    public List<Course> getAllCourses() {
+        return courseRepo.findAll();
+    }
+
+    public List<Course> getCoursesByTeacher(Long teacherId) {
+        try {
+            return courseRepo.findByTeacherId(teacherId);
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to get course with teacher_id: " + teacherId, e);
+        }
+    }
 
 }

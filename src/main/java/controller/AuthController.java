@@ -1,7 +1,11 @@
 package controller;
 
-import services.AuthService;
-import services.AuthResult;
+import entity.Course;
+import repository.CourseRepository;
+import repository.EnrollmentRepository;
+import repository.GradeRepository;
+import services.*;
+
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -48,11 +52,33 @@ public class AuthController {
 
     private void openStudentMenu(Long studentId) {
         System.out.println("Opening STUDENT menu for user id = " + studentId);
-        // later: StudentController
+        CourseRepository courseRepo = new CourseRepository();
+        EnrollmentRepository enrollmentRepo = new EnrollmentRepository();
+        GradeRepository gradeRepo = new GradeRepository();
+
+        CourseService courseService = new CourseService(courseRepo);
+
+        EnrollmentService enrollmentService = new EnrollmentService(enrollmentRepo, courseRepo);
+        StudentService studentService = new StudentService(enrollmentService, gradeRepo);
+
+        StudentController studentController = new StudentController(studentService, courseService);
+
+        studentController.start(studentId);
     }
 
     private void openTeacherMenu(Long teacherId) {
-        System.out.println("Opening TEACHER menu for user id = " + teacherId);
-        // later: TeacherController
+        CourseRepository courseRepo = new CourseRepository();
+        EnrollmentRepository enrollmentRepo = new EnrollmentRepository();
+        GradeRepository gradeRepo = new GradeRepository();
+
+        CourseService courseService = new CourseService(courseRepo);
+        TeacherService teacherService =
+                new TeacherService(courseRepo, enrollmentRepo, gradeRepo);
+
+        TeacherController teacherController =
+                new TeacherController(teacherService, courseService);
+
+        teacherController.start(teacherId);
     }
+
 }

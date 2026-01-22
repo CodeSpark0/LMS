@@ -12,6 +12,27 @@ import java.util.Optional;
 
 public class CourseRepository {
 
+    public List<Course> findAll() {
+        String sql = "SELECT * FROM courses";
+
+        try (
+                Connection conn = DatabaseManager.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            ResultSet rs = stmt.executeQuery();
+
+            List<Course> courseList = new ArrayList<>();
+            while (rs.next()) {
+                Course course = new Course(rs.getLong("id"), rs.getString("title"), rs.getInt("capacity"), rs.getString("description"));
+                courseList.add(course);
+            }
+            return courseList;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
     public Optional<Course> findById(Long id) {
         String sql = """
             SELECT id, title, capacity, description, teacher_id
@@ -132,9 +153,6 @@ public class CourseRepository {
         }
     }
 
-    // ───────────────────────────────
-    // Mapper (single source of truth)
-    // ───────────────────────────────
     private Course mapRow(ResultSet rs) throws Exception {
         return new Course(
                 rs.getLong("id"),
