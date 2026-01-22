@@ -45,7 +45,7 @@ public class AuthController {
 
     private void openStudentMenu(Long studentId) {
         System.out.println("Opening STUDENT menu for user id = " + studentId);
-        // later: StudentController
+        // later: StudentController 
     }
 
     private void openTeacherMenu(Long teacherId) {
