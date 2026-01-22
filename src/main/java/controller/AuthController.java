@@ -6,6 +6,7 @@ import services.AuthResult;
 import java.util.Optional;
 import java.util.Scanner;
 import entity.Role;
+import util.Session;
 
 public class AuthController {
 
@@ -36,6 +37,8 @@ public class AuthController {
         System.out.println("Login successful!");
         System.out.println("Role: " + auth.getRole());
 
+        Session.login(auth.getUserId(), auth.getRole());
+
         switch (auth.getRole()) {
             case Role.STUDENT -> openStudentMenu(auth.getUserId());
             case Role.TEACHER -> openTeacherMenu(auth.getUserId());
@@ -45,7 +48,7 @@ public class AuthController {
 
     private void openStudentMenu(Long studentId) {
         System.out.println("Opening STUDENT menu for user id = " + studentId);
-        // later: StudentController 
+        // later: StudentController
     }
 
     private void openTeacherMenu(Long teacherId) {
