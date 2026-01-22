@@ -136,6 +136,32 @@ public class GradeRepository {
         }
     }
 
+    public Optional<Grade> findByStudentAndCourse(Long studentId, Long courseId) {
+        String sql = "SELECT id, student_id, course_id, percentage FROM grades WHERE student_id = ? AND course_id = ?";
+
+        try (
+                Connection conn = DatabaseManager.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setLong(1, studentId);
+            stmt.setLong(2, courseId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(mapRow(rs));
+                }
+                return Optional.empty();
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Failed to find grade for student " + studentId + " in course " + courseId,
+                    e
+            );
+        }
+    }
+
+
     private Grade mapRow(ResultSet rs) throws Exception {
         return new Grade(
                 rs.getLong("id"),
