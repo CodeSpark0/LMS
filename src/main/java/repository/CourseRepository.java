@@ -23,7 +23,7 @@ public class CourseRepository {
 
             List<Course> courseList = new ArrayList<>();
             while (rs.next()) {
-                Course course = new Course(rs.getLong("id"), rs.getString("title"), rs.getInt("capacity"), rs.getString("description"));
+                Course course = new Course(rs.getLong("id"), rs.getLong("teacher_id"), rs.getString("title"), rs.getInt("capacity"), rs.getString("description"));
                 courseList.add(course);
             }
             return courseList;
