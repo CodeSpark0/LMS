@@ -25,7 +25,6 @@ public class TeacherService {
         this.gradeRepo = gradeRepo;
     }
 
-    // Assign or update a student's grade
     public void assignGrade(Long teacherId, Long studentId, Long courseId, int percentage) {
         try {
             Course course = courseRepo.findById(courseId)
@@ -36,12 +35,10 @@ public class TeacherService {
                 throw new RuntimeException("Teacher does not own this course");
             }
 
-            // Enrollment check
             if (!enrollmentRepo.isEnrolled(studentId, courseId)) {
                 throw new RuntimeException("Student is not enrolled in this course");
             }
 
-            // Check if grade already exists
             Grade existingGrade = gradeRepo
                     .findByStudentAndCourse(studentId, courseId)
                     .orElse(null);
@@ -62,7 +59,6 @@ public class TeacherService {
         }
     }
 
-    // View students enrolled in teacher's course
     public List<Enrollment> getStudentsInCourse(Long teacherId, Long courseId) {
         try {
             Course course = courseRepo.findById(courseId)
