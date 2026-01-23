@@ -66,9 +66,9 @@ public class EnrollmentService {
         }
     }
 
-    public List<Enrollment> getByStudent(Long studentId) {
+    public List<Course> getByStudent(Long studentId) {
         try {
-            return enrollmentRepo.findByStudentId(studentId);
+            return enrollmentRepo.findCoursesByStudentId(studentId);
         } catch (Exception e) {
             throw new RuntimeException(
                     "Failed to get enrollments for student " + studentId, e

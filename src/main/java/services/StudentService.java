@@ -1,5 +1,6 @@
 package services;
 
+import entity.Course;
 import entity.Enrollment;
 import entity.Grade;
 import repository.GradeRepository;
@@ -27,7 +28,7 @@ public class StudentService {
         enrollmentService.unenroll(studentId, courseId);
     }
 
-    public List<Enrollment> getMyEnrollments(Long studentId) {
+    public List<Course> getMyEnrollments(Long studentId) {
         return enrollmentService.getByStudent(studentId);
     }
 

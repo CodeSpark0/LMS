@@ -1,6 +1,7 @@
 package repository;
 
 import entity.Enrollment;
+import entity.Course;
 import util.DatabaseManager;
 
 import java.sql.Connection;
@@ -166,6 +167,46 @@ public class EnrollmentRepository {
                 rs.getLong("student_id"),
                 rs.getLong("course_id"),
                 rs.getTimestamp("enrolled_at").toLocalDateTime()
+        );
+    }
+
+    public List<Course> findCoursesByStudentId(Long studentId) {
+        String sql = """
+            SELECT c.id, c.teacher_id, c.capacity, c.title, c.description,
+            FROM enrollments e
+            JOIN courses c ON c.id = e.course_id
+            WHERE e.student_id = ?
+            ORDER BY e.enrolled_at DESC
+            """;
+
+        List<Course> result = new ArrayList<>();
+
+        try (
+                Connection conn = DatabaseManager.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setLong(1, studentId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    result.add(mapCourse(rs));
+                }
+            }
+
+            return result;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to find courses for student " + studentId, e);
+        }
+    }
+
+    private Course mapCourse(ResultSet rs) throws Exception {
+        return new Course(
+                rs.getLong("id"),
+                rs.getLong("teacher_id"),
+                rs.getString("title"),
+                rs.getInt("capacity"),
+                rs.getString("description")
         );
     }
 }

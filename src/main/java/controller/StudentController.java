@@ -81,17 +81,21 @@ public class StudentController {
     }
 
     private void showMyEnrollments(Long studentId) {
-        List<Enrollment> enrollments =
+        List<Course> courses =
                 studentService.getMyEnrollments(studentId);
 
-        if (enrollments.isEmpty()) {
+        if (courses.isEmpty()) {
             System.out.println("You are not enrolled in any courses.");
             return;
         }
 
         System.out.println("\n--- My Enrollments ---");
-        for (Enrollment e : enrollments) {
-            System.out.println("Course ID: " + e.getCourseId());
+        for (Course e : courses) {
+            System.out.println("Course ID: " + e.getId());
+            System.out.println("Title: " + e.getTitle());
+            System.out.println("Capacity: " + e.getCapacity());
+            System.out.println("Description: " + e.getDescription());
+            System.out.println();
         }
     }
 
