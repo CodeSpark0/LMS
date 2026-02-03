@@ -1,10 +1,12 @@
 package services;
 
 import entity.Course;
+import entity.CourseDetailsDTO;
 import repository.CourseRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CourseService {
 
@@ -20,6 +22,24 @@ public class CourseService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to add course", e);
         }
+    }
+
+//Тут Лямбда -фильтрует курсы, где есть свободные места(Ищет курсы)
+    public List<Course> getCoursesWithOpenSpots() {
+        return courseRepo.findAll().stream()
+                .filter(c -> c.getCapacity() > 0)
+                .collect(Collectors.toList());}
+
+//Это  Категорий + Лямбды - Фильтрация по строке
+    public List<Course> filterByCategory(String category) {
+        return courseRepo.findAll().stream()
+                .filter(c -> c.getCategory().equalsIgnoreCase(category)) // Лямбда
+                .collect(Collectors.toList());
+    }
+//JOIN Получает полные данные c DTO.
+    public CourseDetailsDTO getFullCourseDescription(Long courseId) {
+        return courseRepo.getCourseDetailsWithTeacher(courseId)
+                .orElseThrow(() -> new RuntimeException("Course details not found"));
     }
 
     public void updateCourse(Course course) {

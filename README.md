@@ -6,45 +6,6 @@ It stores **users** and **courses**, supports **login**, and implements a real b
 
 **Goal:** demonstrate clean **OOP structure**, **PostgreSQL + JDBC** connection, and business rules (not only CRUD).
 
----
-
-## 🧩 Project structure
-- **`entity`** — data classes (User, Course, Enrollment)
-- **`repository`** — SQL/JDBC database operations
-- **`service`** — business logic and validations
-- **`controller`** — connects UI and services
-- **`ui`** — console menus and input/output
-- **`util`** — helpers (e.g., `DatabaseManager`)
-
----
-
-## 🧾 How to apply SQL (pgAdmin 4)
-SQL scripts are in `sql/`:
-- `sql/schema.sql` — creates tables
-- `sql/seed.sql` — inserts demo data
-
-Steps:
-1. Create database (example: `lms_db`)
-2. Open **Query Tool** in pgAdmin 4
-3. Run `schema.sql`, then run `seed.sql`
-
----
-
-## ▶️ How to run
-1. Open the project in **IntelliJ IDEA**
-2. Set DB credentials (recommended):
-   create `src/main/resources/application.properties`
-
-db.url=  
-db.user=  
-db.password=      
-
-
-3. Run the `Main` class  
-   If connection is correct, the app prints: **DB OK**
-
----
-
 ## 🔐 Demo logins (from seed.sql)
 - **Teacher:** `teacher1 / 1234`
 - **Student:** `stud1 / 1111`
@@ -52,5 +13,52 @@ db.password=
 
 ---
 
-## 👥 Team
-**CodeSpark0** — Kuttybayev Alikhan
+## 📂 Project Structure
+```
+📂 src
+├── 📂 controllers       
+│   ├── AuthController.java
+│   ├── StudentController.java
+│   ├── TeacherController.java
+│
+├── 📂 entity           
+│   ├── Course.java
+│   ├── Enrollment.java
+│   ├── Grade.java
+│   ├── Role.java
+│   ├── Student.java
+│   ├── Teacher.java
+│   ├── User.java
+│   
+├── 📂 repository       
+│   ├── CourseRepository.java
+│   ├── EnrollmentRepository.java
+│   ├── GradeRepository.java
+│   ├── StudentRepository.java
+│   ├── TeacherRepository.java
+│  
+├── 📂 services
+│   ├── AuthResult.java
+│   ├── AuthService.java
+│   ├── CourseService.java
+│   ├── EnrollmentService.java
+│   ├── StudentService.java
+│   ├── TeacherService.java
+│  
+├── 📂 util
+│   ├── DatabaseManager.java
+│   ├── Session.java
+│ 
+├── Main.java 
+│ 
+├─📂 resources         
+│  ├── application.properties
+            
+├── README.md               
+```
+
+## 📌 Contributors
+📌 **Team Members**:
+- [Alikhan](https://github.com/CodeSpark0)
+- [Alua](https://github.com/poterpish)
+- [Nurasyl](https://github.com/Nurasyl-MN)

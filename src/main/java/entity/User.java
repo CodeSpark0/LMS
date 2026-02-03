@@ -11,9 +11,9 @@ public abstract class User {
 
     protected User(Long id, String email, String fullName, String passwordHash) {
         this.id = id;
-        this.email = email;
+        setEmail(email); // Используем сеттер с проверкой
         this.fullName = fullName;
-        this.passwordHash = passwordHash;
+        setPasswordHash(passwordHash); // Используем сеттер с проверкой
     }
 
     public Long getId() { return id; }
@@ -22,7 +22,19 @@ public abstract class User {
     public String getPasswordHash() { return passwordHash; }
 
     public void setId(Long id) { this.id = id; }
-    public void setEmail(String email) { this.email = email; }
+
+// ВАЛИДАЦИЯ дял емайл и пароля
+    public void setEmail(String email) {
+        if (email == null || !email.contains("@") || !email.contains(".")) {
+            throw new IllegalArgumentException("Invalid email format");}
+        this.email = email;
+    }
+
     public void setFullName(String fullName) { this.fullName = fullName; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
+    public void setPasswordHash(String passwordHash) {
+        if (passwordHash == null || passwordHash.length() < 6) {
+            throw new IllegalArgumentException("Password must be at least 6 characters");}
+        this.passwordHash = passwordHash;
+    }
 }
